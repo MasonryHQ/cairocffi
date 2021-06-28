@@ -38,6 +38,8 @@ def dlopen(ffi, library_names, filenames):
         try:
             return ffi.dlopen(filename)
         except OSError as exception:  # pragma: no cover
+            if filename == 'libcairo.so.2':
+              raise exception
             exceptions.append(exception)
 
     error_message = '\n'.join(  # pragma: no cover
